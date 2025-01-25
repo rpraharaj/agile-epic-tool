@@ -1,0 +1,28 @@
+{
+    "compilerOptions": {
+      // Target modern JS
+      "target": "ES2022",
+      // Use an ES module format
+      "module": "esnext",
+      // For Node-like import resolution, or keep "node" if that suits your environment
+      "moduleResolution": "node",
+  
+      // Key: exclude DOM library to avoid collisions with Workers
+      "lib": ["es2022"],
+  
+      // Strict checking
+      "strict": true,
+      "isolatedModules": true,
+  
+      // Output compiled JS to dist/
+      "outDir": "dist",
+  
+      // Pull in Cloudflare Worker definitions
+      "types": ["@cloudflare/workers-types"],
+  
+      // Skip checking all .d.ts for conflicts
+      "skipLibCheck": true
+    },
+    "include": ["src/**/*.ts"]
+  }
+  

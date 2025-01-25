@@ -1,0 +1,12 @@
+name = "agile-epic-tool"
+compatibility_date = "2023-10-01"
+main = "dist/index.js"
+
+# Serve static files from public/ folder
+site = { bucket = "./public", include = ["index.html", "styles.css", "app.js"] }
+
+# Example environment variables (these might be stored as secrets):
+# You can either put them directly here (not recommended for real secrets)
+# or set them using: wrangler secret put OPENROUTER_API_KEY
+[vars]
+ENVIRONMENT = "development"

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Agile EPIC Generator</title>
+    <!-- Load Bootstrap CSS, etc. from CDN or locally -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="container my-4" id="app">
+      <!-- Replicate your existing form UI -->
+      <h2>Agile EPIC-Feature-Story Generator</h2>
+
+      <form id="epicForm">
+        <div class="mb-3">
+          <label for="reqTitle" class="form-label fw-bold">
+            Requirement Brief <span class="text-danger">*</span>
+          </label>
+          <textarea class="form-control" id="reqTitle" rows="2"></textarea>
+        </div>
+        <div class="mb-3">
+          <label for="reqDescription" class="form-label fw-bold">Requirement Description</label>
+          <textarea class="form-control" id="reqDescription" rows="2"></textarea>
+        </div>
+        <div class="mb-3">
+          <label for="reqInstructions" class="form-label fw-bold">Custom Instructions</label>
+          <textarea class="form-control" id="reqInstructions" rows="2"></textarea>
+        </div>
+        <div class="mb-3">
+          <label class="form-label fw-bold">Select LLM</label>
+          <div class="form-check">
+            <input
+              class="form-check-input"
+              type="radio"
+              name="apiChoice"
+              id="apiChoiceGoogleGemini"
+              value="google_gemini"
+              checked
+            />
+            <label class="form-check-label" for="apiChoiceGoogleGemini">Google Gemini</label>
+          </div>
+          <div class="form-check">
+            <input
+              class="form-check-input"
+              type="radio"
+              name="apiChoice"
+              id="apiChoiceOpenRouter"
+              value="openrouter"
+            />
+            <label class="form-check-label" for="apiChoiceOpenRouter">OpenRouter (DeepSeek)</label>
+          </div>
+        </div>
+
+        <div class="d-flex gap-2 mb-2">
+          <button class="btn btn-primary" type="button" id="btnCreateEpic">Create EPIC</button>
+          <button class="btn btn-primary" type="button" id="btnCreateEpicFeatures">Create EPIC + Features</button>
+          <button class="btn btn-primary" type="button" id="btnCreateAll">Create EPIC + Features + Stories</button>
+        </div>
+      </form>
+
+      <!-- Place for status messages -->
+      <div class="alert alert-danger d-none" id="errorMessage"></div>
+      <div class="alert alert-success d-none" id="successMessage"></div>
+      <div class="my-3" id="loadingSpinner" style="display:none;">
+        Generating content... Please wait.
+      </div>
+
+      <!-- Output area -->
+      <div id="outputContainer" class="mt-4"></div>
+    </div>
+
+    <!-- Load your compiled app.js or a separate script if you prefer -->
+    <script src="app.js"></script>
+  </body>
+</html>

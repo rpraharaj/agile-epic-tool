@@ -1,0 +1,20 @@
+/* styles.css */
+
+/* Adjust loading spinner size on small screens */
+@media (max-width: 576px) {
+    #loadingSpinner .spinner-border {
+      width: 2.5rem !important;
+      height: 2.5rem !important;
+    }
+  }
+  
+  /* Ensure card headers stack properly on small devices */
+  .card-header-row {
+    flex-direction: column !important;
+  }
+  
+  /* Add spacing for header buttons */
+  .card-header-buttons {
+    margin-top: 10px;
+  }
+  
