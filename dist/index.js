@@ -1,17 +1,31 @@
-// src/index.ts
 import { handleRequest } from "./router";
+import { getAssetFromKV, serveSinglePageApp } from '@cloudflare/kv-asset-handler';
 export default {
     async fetch(request, env, ctx) {
-        // If it's an /api route, handle it in handleRequest. Otherwise let static serve
-        const url = new URL(request.url);
-        if (url.pathname.startsWith("/api")) {
-            const response = await handleRequest(request, env);
-            if (response) {
-                return response;
+        console.log("ENV KEYS =>", Object.keys(env));
+        try {
+            const url = new URL(request.url);
+            // API Routes
+            if (url.pathname.startsWith("/api")) {
+                const response = await handleRequest(request, env);
+                return response || new Response("Not found", { status: 404 });
             }
+            // Static Assets with SPA fallback
+            return await getAssetFromKV({
+                request,
+                waitUntil: ctx.waitUntil.bind(ctx),
+            }, {
+                ASSET_NAMESPACE: env.__STATIC_CONTENT,
+                ASSET_MANIFEST: env.__STATIC_CONTENT_MANIFEST,
+                mapRequestToAsset: serveSinglePageApp // 👈 Critical for SPAs
+            });
         }
-        // Wrangler will automatically serve static assets for other paths
-        // so just return a default 404 if not found:
-        return new Response("Not found", { status: 404 });
-    }
+        catch (e) {
+            // Custom 404 handling
+            return new Response("Page not found", {
+                status: 404,
+                headers: { "Content-Type": "text/html" }
+            });
+        }
+    },
 };

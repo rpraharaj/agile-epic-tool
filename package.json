@@ -2,14 +2,16 @@
     "name": "agile-epic-tool",
     "version": "1.0.0",
     "scripts": {
-      "build": "tsc",
-      "dev": "wrangler dev",
-      "deploy": "wrangler publish"
+        "build": "tsc",
+        "dev": "wrangler dev",
+        "deploy": "wrangler publish"
     },
     "devDependencies": {
-      "@cloudflare/workers-types": "^4.20231002.0",
-      "typescript": "^5.2.2",
-      "wrangler": "^3.6.0"
+        "@cloudflare/workers-types": "^4.20231002.0",
+        "typescript": "^5.2.2",
+        "wrangler": "^3.6.0"
+    },
+    "dependencies": {
+        "@cloudflare/kv-asset-handler": "^0.3.4"
     }
-  }
-  
+}
